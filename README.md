@@ -46,7 +46,7 @@ Cache-aside over write-through: redirects are read-heavy and clicks vastly outnu
 Kafka instead of writing analytics directly to MongoDB in the request path: a direct synchronous write would make every redirect wait on an analytics database write, coupling a "must be fast" path to a "nice to have" feature. Kafka decouples them — the redirect publishes and returns immediately; a separate consumer handles the actual write.
 Click events keyed by short code: guarantees all events for a given link stay in order within a partition, even though partitions in general don't preserve cross-key ordering.
 Ownership via @ManyToOne to User, not a plain username string: lets the database enforce referential integrity instead of relying on application code alone.
-Redirects are public; everything else requires a token: a short link only works if anyone can follow it without logging in. Auth protects creation, ownership, and analytics — not the redirect itself.
+Redirects are public; everything else requires a token: a short link only works if anyone can follow it without logging in. Auth protects creation, ownership, and analytics not the redirect itself.
 
 Measured performance
 Redirect latency, tested locally with 100 sequential requests via curl:
